@@ -6,7 +6,7 @@ node {
     target_hosts = [["192.168.207.49", "22"], ["192.168.207.49", "22"]]
     app_name = "share-app"
     env = "uat"
-    app_home = "/root/YTOApps/$app_name-$env"
+    app_home = "/root/$app_name-$env"
     branch = "master"
     type = "application"
     project_version = "1.0.0-SNAPSHOT"
