@@ -3,7 +3,7 @@ node {
     maven_home = "/home/gnosis/apache-maven-3.6.1/bin/mvn"
     maven_settings_file_path = "/home/gnosis/apache-maven-3.6.1/conf/yto/settings_yto_new.xml"
     java_home = "/usr/java/jdk_8u231/bin/java"
-    target_hosts = [["192.168.207.50", "22"], ["192.168.207.49", "22"]]
+    target_hosts = [["192.168.207.49", "22"], ["192.168.207.49", "22"]]
     app_name = "share-app"
     env = "dev"
     app_home = "/root/$app_name-$env"
