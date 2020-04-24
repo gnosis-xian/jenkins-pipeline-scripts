@@ -1,24 +1,24 @@
-node {
-    git_url = "git@github.com:gnosis-xian/jenkins-pipeline-generator.git"
-    maven_home = "/home/gnosis/apache-maven-3.6.1/bin/mvn"
-    maven_settings_file_path = "/home/gnosis/apache-maven-3.6.1/conf/yto/settings_yto_new.xml"
-    java_home = "/usr/java/jdk_8u231/bin/java"
-    target_hosts = [["192.168.207.49", "22"], ["192.168.207.49", "22"]]
-    app_name = "share-app"
-    env = "uat"
-    app_home = "/root/$app_name-$env"
-    branch = "master"
-    type = "application"
-    project_version = "1.0.0-SNAPSHOT"
-    host_user = "root"
-    git_credentials_id = "gaojing-yto-gitlab"
-    deploy_sleep_seconds = 0
-    is_backup = false
-    to_tag = false
-    code_static_check = false
-    unit_test = false
-    maven_package = true
+git_url = "git@github.com:gnosis-xian/jenkins-pipeline-generator.git"
+maven_home = "/home/gnosis/apache-maven-3.6.1/bin/mvn"
+maven_settings_file_path = "/home/gnosis/apache-maven-3.6.1/conf/yto/settings_yto_new.xml"
+java_home = "/usr/java/jdk_8u231/bin/java"
+target_hosts = [["192.168.207.49", "22"], ["192.168.207.49", "22"]]
+app_name = "share-app"
+env = "uat"
+app_home = "/root/$app_name-$env"
+branch = "master"
+type = "application"
+project_version = "1.0.0-SNAPSHOT"
+host_user = "root"
+git_credentials_id = "gaojing-yto-gitlab"
+deploy_sleep_seconds = 0
+is_backup = false
+to_tag = false
+code_static_check = false
+unit_test = false
+maven_package = true
 
+node {
     stage('Pull Code') {
         git branch: "$branch", credentialsId: "$git_credentials_id", url: "$git_url"
         echo "Pulled $git_url branch: $branch ."
@@ -26,7 +26,7 @@ node {
 
     if (to_tag) {
         stage("Tag to Git") {
-            now_time = sh returnStdout: true, script: "echo -n `date +%Y%m%d%H%M%S`"
+            now_time = sh returnStdout: true, script: "echo -n `date +%Y%m%d%H%M`"
             tag_name = "tag_from_" + branch + "_for_" + env + "_at_" + now_time
             sh "git tag $tag_name"
             sh "git push origin $tag_name"
@@ -47,7 +47,7 @@ node {
     }
 
     if (is_backup) {
-        now_time = sh returnStdout: true, script: "echo -n `date +%Y%m%d%H%M%S`"
+        now_time = sh returnStdout: true, script: "echo -n `date +%Y%m%d%H%M`"
         target_hosts.each { e ->
             host = e[0]
             port = e[1]
